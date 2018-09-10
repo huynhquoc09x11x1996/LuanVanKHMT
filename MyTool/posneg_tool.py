@@ -53,7 +53,7 @@ try:
 
     negative_path = sys.argv[3]
 
-    if (len(source_path) and len(positive_path) and len(negative_path)) > 3:  # input params tu command line ok
+    if (len(source_path) and len(positive_path) and len(negative_path)) > 3:  # input params tu command lin
 
         static_source_path = str(source_path).rstrip(
             str(source_path).split('/')[-1])  # rstrip remove object nhap vao => get path not contain folder
