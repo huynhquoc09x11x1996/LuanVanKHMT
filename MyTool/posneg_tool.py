@@ -1,7 +1,7 @@
 # Written by Huynh Quoc 10/09/2018
 # To use this tool you have to install some libs suchas: opencv-contrib-python,
-# numpy ,python2x, python3x Following the command line format to use this tool: Type this statement: python
-# posneg_tool.py 'source image path' 'pos to save positive image' 'neg to save negative image'
+# numpy ,python2x, python3x Following the command line format to use this tool:
+#Type this statement: python posneg_tool.py 'source image path' 'pos to save positive image' 'neg to save negative image'
 
 import numpy as np
 import cv2
@@ -58,6 +58,7 @@ def isNumber(s):
     else:
         return False
 
+    if (len(source_path) and len(positive_path) and len(negative_path)) > 3:  # input params tu command lin
 
 try:
     old_index = int(sys.argv[1])
