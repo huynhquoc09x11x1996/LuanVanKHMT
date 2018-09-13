@@ -46,25 +46,45 @@ def onMouse(event, x, y, flags, param):
 cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
 cv2.setMouseCallback(windowName, onMouse)
 
+
+def getKeyEvent():
+    return cv2.waitKey(1) & 0xFF;
+
+
+def isNumber(s):
+    realType = int(1)
+    if type(s) == type(realType):
+        return True
+    else:
+        return False
+
+
 try:
-
-    source_path = sys.argv[1]
-    positive_path = sys.argv[2]
-
-    negative_path = sys.argv[3]
-
-    if (len(source_path) and len(positive_path) and len(negative_path)) > 3:  # input params tu command line ok
-
+    old_index = int(sys.argv[1])
+    source_path = sys.argv[2] if sys.argv[2][-1] == "/" else sys.argv[2] + "/"
+    positive_path = sys.argv[3] if sys.argv[3][-1] == "/" else sys.argv[3] + "/"
+    negative_path = sys.argv[4] if sys.argv[4][-1] == "/" else sys.argv[4] + "/"
+    if (len(source_path) and len(positive_path) and len(negative_path)) > 3 and isNumber(
+            old_index):  # input params tu command line ok
+        index = old_index - 1
         static_source_path = str(source_path).rstrip(
-            str(source_path).split('/')[-1])  # rstrip remove object nhap vao => get path not contain folder
-        folder_name_source = str(source_path).split('/')[-1]  # get folder name in param
+            str(source_path).split('/')[-2])  # rstrip remove object nhap vao => get path not contain folder
+        folder_name_source = str(source_path).split('/')[-2]  # get folder name in param
         for _, path in enumerate(os.listdir(static_source_path)):
             list_path.append(static_source_path + path)
         list_path.remove(list_path[0])
+
         while not (cv2.waitKey(1) & 0xFF == ord('q')):
             path = list_path[index]
             frame = cv2.imread(path, cv2.IMREAD_COLOR)
             cv2.imshow(windowName, frame)
+
+            # if getKeyEvent() == ord('e'):
+            #     index -= 1
+            #     if index == 0: index = 0
+            # elif getKeyEvent() == ord('r'):
+            #     index += 1
+            #     if index == len(list_path): index = len(list_path)
         cv2.destroyAllWindows()
 
     else:
