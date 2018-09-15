@@ -27,7 +27,7 @@ for example:
 
 (lần đầu tiên chạy thì ảnh thứ nhất thì index là 1) python3 posneg_tool.py 1 ../DataPath ../PosPath ../NegPath ABCDEF
 
-(when you feel hunry and shutdown your computer, you have to remember the index of cut image and then open your termial and type) 
+(when you feel hungy and shutdown your computer, you have to remember the index of cut image and then open your terminal and type the statement like this) 
 
 python3 posneg_tool.py (index of cut image) ../DataPath ../PosPath ../NegPath ABCDEF
 
