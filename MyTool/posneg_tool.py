@@ -2,6 +2,7 @@
 # To use this tool you have to install some libs suchas: opencv-contrib-python,
 # numpy ,python2x, python3x Following the command line format to use this tool: Type this statement: python
 # posneg_tool.py 'source image path' 'pos to save positive image' 'neg to save negative image'
+import datetime
 
 import numpy as np
 import cv2
@@ -39,8 +40,8 @@ def onMouse(event, x, y, flags, param):
         background[iy:y, ix: x] = 0
         # cv2.imshow("ROI", cropped)
         # cv2.imshow("Background", background)
-        cv2.imwrite(positive_path + target_name + "_{:08}_IMG.jpg".format(index), cropped)
-        cv2.imwrite(negative_path + target_name + "_{:08}_IMG.jpg".format(index), background)
+        cv2.imwrite(positive_path + target_name + "_IMG.jpg".format(index), cropped)
+        cv2.imwrite(negative_path + target_name + "_IMG.jpg".format(index), background)
     cv2.imshow(windowName, frame)
 
 
@@ -59,13 +60,12 @@ def isNumber(s):
     else:
         return False
 
-
 try:
     old_index = int(sys.argv[1])
     source_path = sys.argv[2] if sys.argv[2][-1] == "/" else sys.argv[2] + "/"
     positive_path = sys.argv[3] if sys.argv[3][-1] == "/" else sys.argv[3] + "/"
     negative_path = sys.argv[4] if sys.argv[4][-1] == "/" else sys.argv[4] + "/"
-    target_name = sys.argv[5]
+    target_name =  '{date:%Y_%m_%d_%H_%M_%S}'.format(date=datetime.datetime.now())
     if (len(source_path) and len(positive_path) and len(negative_path)) > 3 and isNumber(
             old_index) and len(target_name) > 5:  # input params tu command line ok
         index = old_index - 1
@@ -83,6 +83,6 @@ try:
         cv2.destroyAllWindows()
 
     else:
-        print("Check your folder path, it maybe is wrong!")
+        print("Kiem tra lai doi so dau vao, co le bi loi~!")
 except:
     print("Unexpected error:", sys.exc_info())
