@@ -2,15 +2,13 @@
 # To use this tool you have to install some libs suchas: opencv-contrib-python,
 # numpy ,python2x, python3x Following the command line format to use this tool: Type this statement: python
 # posneg_tool.py 'source image path' 'pos to save positive image' 'neg to save negative image'
-import datetime
-
+import time
 import numpy as np
 import cv2
 import sys
 import os
 
 windowName = "LuanVanKHMT_ObjectMarker"
-target_name = ""
 ix, iy = -1, -1
 index = 0
 frame = None
@@ -29,21 +27,19 @@ def onMouse(event, x, y, flags, param):
         ix, iy = x, y
     elif event == cv2.EVENT_MOUSEMOVE:
         if drawing:
-            cv2.rectangle(frame, (ix, iy), (x, y), (255, 0, 0), 1)
+            cv2.rectangle(frame, (ix - 1, iy - 1), (x, y), (255, 0, 0), 1)
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
         index += 1
-        cv2.rectangle(frame, (ix, iy), (x, y), (0, 255, 0), 1)
+        cv2.rectangle(frame, (ix - 1, iy - 1), (x, y), (0, 255, 0), 1)
         print("Image:", index)
         cropped = frame[iy:y, ix: x]
         background = np.copy(frame)
         background[iy:y, ix: x] = 0
-        # cv2.imshow("ROI", cropped)
-        # cv2.imshow("Background", background)
-        cv2.imwrite(positive_path + target_name + "_IMG.jpg".format(index), cropped)
-        cv2.imwrite(negative_path + target_name + "_IMG.jpg".format(index), background)
+        target_name = str(int(time.time() * 1000.0))
+        cv2.imwrite(positive_path + "IMG_" + target_name + ".jpg".format(index), cropped)
+        cv2.imwrite(negative_path + "IMG_" + target_name + ".jpg".format(index), background)
     cv2.imshow(windowName, frame)
-
 
 cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
 cv2.setMouseCallback(windowName, onMouse)
@@ -60,14 +56,14 @@ def isNumber(s):
     else:
         return False
 
+
 try:
     old_index = int(sys.argv[1])
     source_path = sys.argv[2] if sys.argv[2][-1] == "/" else sys.argv[2] + "/"
     positive_path = sys.argv[3] if sys.argv[3][-1] == "/" else sys.argv[3] + "/"
     negative_path = sys.argv[4] if sys.argv[4][-1] == "/" else sys.argv[4] + "/"
-    target_name =  '{date:%Y_%m_%d_%H_%M_%S}'.format(date=datetime.datetime.now())
     if (len(source_path) and len(positive_path) and len(negative_path)) > 3 and isNumber(
-            old_index) and len(target_name) > 5:  # input params tu command line ok
+            old_index):  # input params tu command line ok
         index = old_index - 1
         static_source_path = str(source_path).rstrip(
             str(source_path).split('/')[-2])  # rstrip remove object nhap vao => get path not contain folder
