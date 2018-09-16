@@ -6,6 +6,14 @@ How to use the Tool:
 
 *** Cài python3x hoặc python2x để sử dụng tool:***
 
+***Key events: ***
+
+***nhấn nút Q:*** thoát khỏi ứng dụng
+
+***Nhấn nút R:***  trở về ảnh trước
+
+***Nhấn phím space: *** đi tới ảnh kế 
+
 cú pháp sử dụng với terminal: python3 posneg_tool.py  index_of_image  data_folder_path positive_folder_path  negative_folder_path expect_prefix_name_of_file
 
 ***python3*** : phiên bản python sử dụng, có thể là python 2.x (python2)
