@@ -41,6 +41,7 @@ def onMouse(event, x, y, flags, param):
         cv2.imwrite(negative_path + "IMG_" + target_name + ".jpg".format(index), background)
     cv2.imshow(windowName, frame)
 
+
 cv2.namedWindow(windowName, cv2.WINDOW_AUTOSIZE)
 cv2.setMouseCallback(windowName, onMouse)
 
@@ -72,10 +73,17 @@ try:
             list_path.append(static_source_path + path)
         list_path.remove(list_path[0])
 
-        while not (cv2.waitKey(1) & 0xFF == ord('q')):
+        while True:
+            key = cv2.waitKey(1) & 0xFF
             path = list_path[index]
             frame = cv2.imread(path, cv2.IMREAD_COLOR)
             cv2.imshow(windowName, frame)
+            if key == ord('q'):
+                break
+            elif key == 32:
+                index += 1
+            elif key == ord('r'):
+                index -= 1
         cv2.destroyAllWindows()
 
     else:
