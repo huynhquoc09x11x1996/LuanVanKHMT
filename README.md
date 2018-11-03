@@ -35,7 +35,8 @@ for example:
 
 (lần đầu tiên chạy thì ảnh thứ nhất thì index là 1) python3 posneg_tool.py 1 ../DataPath ../PosPath ../NegPath ABCDEF
 
-(when you feel hungy and shutdown your computer, you have to remember the index of cut image and then open your terminal and type the statement like this) 
+
+do tool này ko hỗ trợ cache workspace nên khi tắt máy đột ngột sẽ ko có lưu lại ảnh vừa cắt cho nên bạn phải xem ảnh đã cắt tới đâu và đánh index mới đê cắt tiếp
 
 python3 posneg_tool.py (index of cut image) ../DataPath ../PosPath ../NegPath ABCDEF
 
